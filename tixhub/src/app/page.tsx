@@ -50,16 +50,28 @@ export default function Home() {
             <h1 className="text-2xl font-bold">TixHub</h1>
           </div>
           <nav className="hidden md:flex space-x-4">
-            <a href="#" className="hover:underline">
+            <a
+              href="#"
+              className="hover:underline hover:subpixel-antialiased decoration-sky-500 text-lg"
+            >
               Sports
             </a>
-            <a href="#" className="hover:underline">
+            <a
+              href="#"
+              className="hover:underline hover:subpixel-antialiased decoration-sky-500 text-lg"
+            >
               Music
             </a>
-            <a href="#" className="hover:underline">
+            <a
+              href="#"
+              className="hover:underline hover:subpixel-antialiased decoration-sky-500 text-lg"
+            >
               Arts & Theater
             </a>
-            <a href="#" className="hover:underline">
+            <a
+              href="#"
+              className="hover:underline hover:subpixel-antialiased decoration-sky-500 text-lg"
+            >
               Family
             </a>
           </nav>
@@ -89,7 +101,7 @@ export default function Home() {
                 className="flex-grow"
                 aria-label="Search for events"
               />
-              <Button className="ml-2">
+              <Button className="ml-2 ">
                 <Search className="h-4 w-4 mr-2" />
                 Search
               </Button>
@@ -104,14 +116,14 @@ export default function Home() {
               {featuredEvents.map((event) => (
                 <div
                   key={event.id}
-                  className="bg-card text-card-foreground rounded-lg overflow-hidden shadow-md"
+                  className="bg-card text-card-foreground rounded-lg overflow-hidden shadow-md flex flex-col"
                 >
                   <img
                     src={event.image}
                     alt=""
                     className="w-full h-48 object-cover"
                   />
-                  <div className="p-4">
+                  <div className="p-4 flex flex-col flex-grow justify-between">
                     <h3 className="font-bold text-lg mb-2">{event.name}</h3>
                     <p className="text-muted-foreground">{event.date}</p>
                     <p className="text-muted-foreground">{event.venue}</p>
