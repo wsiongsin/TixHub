@@ -37,6 +37,13 @@ export default function Home() {
       venue: "Ontario Place, Toronto",
       image: "/placeholder.svg?height=400&width=600",
     },
+    {
+      id: 5,
+      name: "Cirque du Soleil: Kooza",
+      date: "Aug 13 - Sep 24",
+      venue: "Ontario Place, Toronto",
+      image: "/placeholder.svg?height=400&width=600",
+    },
   ];
 
   return (
@@ -49,7 +56,7 @@ export default function Home() {
             </button>
             <h1 className="text-2xl font-bold">TixHub</h1>
           </div>
-          <nav className="hidden md:flex space-x-4">
+          <nav className="hidden md:flex space-x-8 ">
             <a
               href="#"
               className="hover:underline hover:subpixel-antialiased decoration-sky-500 text-lg"
@@ -112,25 +119,27 @@ export default function Home() {
         <section className="py-12">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold mb-6">Featured Events</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {featuredEvents.map((event) => (
-                <div
-                  key={event.id}
-                  className="bg-card text-card-foreground rounded-lg overflow-hidden shadow-md flex flex-col"
-                >
-                  <img
-                    src={event.image}
-                    alt=""
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="p-4 flex flex-col flex-grow justify-between">
-                    <h3 className="font-bold text-lg mb-2">{event.name}</h3>
-                    <p className="text-muted-foreground">{event.date}</p>
-                    <p className="text-muted-foreground">{event.venue}</p>
-                    <Button className="mt-4 w-full">Get Tickets</Button>
+            <div dir="ltr">
+              <div className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory">
+                {featuredEvents.map((event) => (
+                  <div
+                    key={event.id}
+                    className="bg-card text-card-foreground rounded-lg overflow-hidden shadow-md flex flex-col min-w-[450px] snap-center"
+                  >
+                    <img
+                      src={event.image}
+                      alt=""
+                      className="w-full h-48 object-cover"
+                    />
+                    <div className="p-4 flex flex-col flex-grow justify-between">
+                      <h3 className="font-bold text-lg mb-2">{event.name}</h3>
+                      <p className="text-muted-foreground">{event.date}</p>
+                      <p className="text-muted-foreground">{event.venue}</p>
+                      <Button className="mt-4 w-full">Get Tickets</Button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </section>
