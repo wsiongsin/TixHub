@@ -1,12 +1,25 @@
 "use client";
 
 import { useState } from "react";
-import { Search, Menu, ShoppingCart, User } from "lucide-react";
+import { Search, Menu, ShoppingCart, User, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Calendar as CalendarComponent } from "@/components/ui/calendar";
+import { format } from "date-fns";
+import { DateRange } from "react-day-picker";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [date, setDate] = useState<DateRange | undefined>({
+    from: undefined,
+    to: undefined,
+  });
 
   const featuredEvents = [
     {
@@ -99,7 +112,7 @@ export default function Home() {
             <h2 className="text-4xl font-bold mb-6">
               Find your next event on TixHub
             </h2>
-            <div className="max-w-2xl mx-auto flex">
+            <div className="max-w-4xl mx-auto flex flex-col md:flex-row gap-2">
               <Input
                 type="text"
                 placeholder="Search for events, venues, or cities"
@@ -108,7 +121,53 @@ export default function Home() {
                 className="flex-grow"
                 aria-label="Search for events"
               />
-              <Button className="ml-2 ">
+              <Input
+                type="text"
+                placeholder="Postal Code"
+                value={postalCode}
+                onChange={(e) => setPostalCode(e.target.value)}
+                className="md:w-32"
+                aria-label="Enter postal code"
+              />
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="w-[280px] justify-start text-left font-normal"
+                  >
+                    <Calendar className="mr-2 h-4 w-4" />
+                    {date?.from ? (
+                      date.to ? (
+                        <>
+                          {format(date.from, "LLL dd, y")} -{" "}
+                          {format(date.to, "LLL dd, y")}
+                        </>
+                      ) : (
+                        format(date.from, "LLL dd, y")
+                      )
+                    ) : (
+                      <span>Pick a date range</span>
+                    )}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent
+                  className="w-auto p-0"
+                  align="start"
+                  side="bottom"
+                  alignOffset={-180}
+                >
+                  <CalendarComponent
+                    initialFocus
+                    mode="range"
+                    defaultMonth={date?.from}
+                    selected={date}
+                    onSelect={setDate}
+                    numberOfMonths={2}
+                    className="rounded-md border"
+                  />
+                </PopoverContent>
+              </Popover>
+              <Button className="md:ml-2">
                 <Search className="h-4 w-4 mr-2" />
                 Search
               </Button>
