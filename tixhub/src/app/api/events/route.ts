@@ -16,10 +16,7 @@ export async function GET(request: Request) {
     const data = await response.json();
 
     return NextResponse.json(data);
-  } catch (error) {
-    return NextResponse.json(
-      { error: "Failed to fetch events" },
-      { status: 500 }
-    );
+  } catch {
+    return NextResponse.json({ status: 500 });
   }
 }
