@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   MapPin,
   Calendar,
@@ -19,6 +19,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Event {
   id: string;
@@ -58,19 +59,7 @@ export default function CategoryPage({
   const [currentPage, setCurrentPage] = useState(1);
   const eventsPerPage = 50;
 
-  const categoryTitles: { [key: string]: string } = {
-    concerts: "CONCERT TICKETS",
-    sports: "SPORTS TICKETS",
-    arts: "ARTS & THEATRE TICKETS",
-    family: "FAMILY TICKETS",
-  };
-
-  useEffect(() => {
-    setCurrentPage(1);
-    fetchEvents();
-  }, [location]);
-
-  const fetchEvents = async () => {
+  const fetchEvents = useCallback(async () => {
     try {
       setError(null);
       const apiKey = process.env.NEXT_PUBLIC_TICKETMASTER_API_KEY;
@@ -133,7 +122,12 @@ export default function CategoryPage({
       console.error("Error fetching events:", error);
       setEvents([]);
     }
-  };
+  }, [location]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+    fetchEvents();
+  }, [fetchEvents]);
 
   const getDateRange = (filter: string) => {
     const today = new Date();
@@ -263,10 +257,12 @@ export default function CategoryPage({
       </header>
       <div className="min-h-screen">
         <div className="relative h-[300px]">
-          <img
-            src="./concerts/assets/concerts.jpg"
+          <Image
+            src="/concerts/assets/concerts.jpg"
             alt="Concerts background"
-            className="w-full h-full object-cover absolute inset-0"
+            fill
+            className="object-cover"
+            priority
           />
           <div className="absolute inset-0 bg-black/50" />
           <div className="relative container mx-auto px-4 h-full flex items-center justify-center">
