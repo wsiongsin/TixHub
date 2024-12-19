@@ -46,11 +46,7 @@ interface Event {
   status?: string;
 }
 
-export default function CategoryPage({
-  params,
-}: {
-  params: { category: string };
-}) {
+export default function CategoryPage({}) {
   const [events, setEvents] = useState<Event[]>([]);
   const [location, setLocation] = useState("all");
   const [dateFilter, setDateFilter] = useState("all");
@@ -329,7 +325,6 @@ export default function CategoryPage({
         <div className="container mx-auto px-4 py-8">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold">
-              {(params?.category || "events").toUpperCase()} •{" "}
               {filteredEvents.length} RESULTS
             </h2>
           </div>
