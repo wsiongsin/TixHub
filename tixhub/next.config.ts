@@ -1,10 +1,7 @@
-module.exports = {
-  async rewrites() {
-    return [
-      {
-        source: "/:path*",
-        destination: "/",
-      },
-    ];
-  },
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  /* config options here */
 };
+
+export default nextConfig;
