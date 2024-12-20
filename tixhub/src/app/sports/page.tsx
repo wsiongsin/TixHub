@@ -73,7 +73,7 @@ export default function CategoryPage({}) {
         const allEvents = await Promise.all(
           cities.map(async (city) => {
             const response = await fetch(
-              `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey}&classificationName=music&segmentName=Music&city=${city}&size=200`
+              `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey}&classificationName=Sports&segmentName=Sports&city=${city}&size=200`
             );
 
             if (!response.ok) {
@@ -96,7 +96,7 @@ export default function CategoryPage({}) {
       } else {
         // Fetch events for single city
         const response = await fetch(
-          `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey}&classificationName=music&segmentName=Music&city=${location}&size=200`
+          `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey}&classificationName=Sports&segmentName=Sports&city=${location}&size=200`
         );
 
         if (!response.ok) {
@@ -254,7 +254,7 @@ export default function CategoryPage({}) {
       <div className="min-h-screen">
         <div className="relative h-[300px]">
           <Image
-            src="/concerts/assets/concerts.jpg"
+            src="/sports/assets/sports.jpg"
             alt="Concerts background"
             fill
             className="object-cover"
@@ -262,7 +262,7 @@ export default function CategoryPage({}) {
           />
           <div className="absolute inset-0 bg-black/50" />
           <div className="relative container mx-auto px-4 h-full flex items-center justify-center">
-            <h1 className="text-white text-5xl font-bold">CONCERTS</h1>
+            <h1 className="text-white text-5xl font-bold">SPORTS</h1>
           </div>
         </div>
         <div className="bg-white border-b">
